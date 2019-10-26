@@ -1,0 +1,107 @@
+#include<iostream>
+#include<cstdlib>
+using namespace std;
+struct node
+{
+  int data;
+  struct node *left;
+  struct node *right;
+};
+struct node *root;
+void append();
+void pairsum();
+void sortedinsert();
+void print();
+int main()
+{
+   append();
+   append();
+   append();
+   append();
+   append();
+   append();
+   sortedinsert();
+   print();
+}
+void append()
+{
+ struct node *temp;
+ temp=(struct node*)malloc(sizeof(struct node));
+ cout<<"enter node data";
+ cin>>temp->data;
+ temp->left=NULL;
+ temp->right=NULL;
+ if(root==NULL)
+ {
+   root=temp;
+ }
+  else
+ {
+   struct node *p;
+   p=root;
+   while(p->right!=NULL)
+   {
+    p=p->right;
+   }
+   p->right=temp;
+   temp->left=p;
+  }
+}
+void print()
+{
+    struct node *s;
+    s=root;
+    while(s)
+    {
+        cout<<s->data<<endl;
+        s=s->right;
+    }
+}
+void pairsum()
+{
+    struct node *p,*q;
+    int count=0,sum;
+    cout<<"enter sum";
+    cin>>sum;
+    p=root;
+
+    while(p)
+    {
+         q=root;
+        while(q)
+        {
+            if(p->data+q->data==sum)
+            {
+                count++;
+                q=q->right;
+            }
+            else
+            {
+                q=q->right;
+            }
+        }
+        p=p->right;
+
+    }
+    cout<<count;
+}
+void sortedinsert()
+{
+    struct node *p,*r;
+    r=(struct node *)malloc(sizeof(struct node));
+    p=root;
+    cout<<"enter data";
+    cin>>r->data;
+    r->right=NULL;
+    r->left=NULL;
+    while(p->data<r->data)
+    {
+        p=p->right;
+    }
+    p=p->left;
+    r->right=p->right;
+    p->right->left=r;
+    p->right=r;
+    r->left=p;
+
+}
